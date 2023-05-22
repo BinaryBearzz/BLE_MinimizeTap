@@ -33,7 +33,7 @@ void blinkStatus()
   }
 }
 
-void echo()
+void echoDistance()
 {
   digitalWrite(TRIGGER_PIN, LOW);
   delayMicroseconds(5);
@@ -73,7 +73,7 @@ void setup()
 void loop()
 {
 
-  echo();
+  echoDistance();
 
   if (millis() - prv_distance > 100)
   {
@@ -88,10 +88,10 @@ void loop()
   {
     ev_change.trigerCallback(true);
   }
-  else
-  {
-    ev_change.trigerCallback(false);
-  }
+  // else
+  // {
+  //   ev_change.trigerCallback(false);
+  // }
   delay(10);
   blinkStatus();
 }
