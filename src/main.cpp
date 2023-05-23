@@ -23,55 +23,10 @@ bool RDY_DETECT = true;
 float measureDistance = 0;
 float trigerDistanceValue = 25;
 
-void blinkStatus()
-{
-  if (!BLE_KB.isConnected())
-  {
-    if (millis() - prv_time > blink_interval)
-    {
-      digitalWrite(LED, !digitalRead(LED));
-      prv_time = millis();
-    }
-  }
-  else
-  {
-    digitalWrite(LED, LOW);
-  }
-}
-
-void scanDistance()
-{
-  digitalWrite(TRIGGER_PIN, LOW);
-  delayMicroseconds(5);
-  digitalWrite(TRIGGER_PIN, HIGH);
-  delayMicroseconds(5);
-  digitalWrite(TRIGGER_PIN, LOW);
-}
-
-void disableAfterDetect(int duration_ms)
-{
-  if (!RDY_DETECT)
-  {
-    if (millis() - prv_time_disable > duration_ms)
-    {
-      RDY_DETECT = true;
-      digitalWrite(READY_DETECT_LED, RDY_DETECT);
-      prv_time_disable = millis();
-    }
-  }
-}
-
-void checkDistanceToMinimize(float sourceDistance, float trigerDistance)
-{
-  if (sourceDistance < trigerDistance && sourceDistance != 0)
-  {
-    ev_change.trigerCallback(true);
-  }
-  else
-  {
-    ev_change.trigerCallback(false);
-  }
-}
+void blinkStatus();
+void scanDistance();
+void disableAfterDetect(int duration_ms);
+void checkDistanceToMinimize(float sourceDistance, float trigerDistance);
 
 void setup()
 {
@@ -133,3 +88,57 @@ void loop()
   delay(10);
   blinkStatus();
 }
+
+#pragma region "Utility function"
+
+void blinkStatus()
+{
+  if (!BLE_KB.isConnected())
+  {
+    if (millis() - prv_time > blink_interval)
+    {
+      digitalWrite(LED, !digitalRead(LED));
+      prv_time = millis();
+    }
+  }
+  else
+  {
+    digitalWrite(LED, LOW);
+  }
+}
+
+void scanDistance()
+{
+  digitalWrite(TRIGGER_PIN, LOW);
+  delayMicroseconds(5);
+  digitalWrite(TRIGGER_PIN, HIGH);
+  delayMicroseconds(5);
+  digitalWrite(TRIGGER_PIN, LOW);
+}
+
+void disableAfterDetect(int duration_ms)
+{
+  if (!RDY_DETECT)
+  {
+    if (millis() - prv_time_disable > duration_ms)
+    {
+      RDY_DETECT = true;
+      digitalWrite(READY_DETECT_LED, RDY_DETECT);
+      prv_time_disable = millis();
+    }
+  }
+}
+
+void checkDistanceToMinimize(float sourceDistance, float trigerDistance)
+{
+  if (sourceDistance < trigerDistance && sourceDistance != 0)
+  {
+    ev_change.trigerCallback(true);
+  }
+  else
+  {
+    ev_change.trigerCallback(false);
+  }
+}
+
+#pragma endregion "END Utility function"
