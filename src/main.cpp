@@ -4,7 +4,7 @@
 #include "BLEClient.h"
 #define TRIGGER_PIN 2
 #define ECHO_PIN 4
-#define LED 5
+// #define LED 5
 #define DETECT_LED 32       // RED
 #define READY_DETECT_LED 33 // BLUE
 #include <HCSR04.h>
@@ -33,12 +33,12 @@ void setup()
   Serial.begin(115200);
   pinMode(TRIGGER_PIN, OUTPUT);
   pinMode(ECHO_PIN, INPUT);
-  pinMode(LED, OUTPUT);
+  // pinMode(LED, OUTPUT);
 
   pinMode(DETECT_LED, OUTPUT);
   pinMode(READY_DETECT_LED, OUTPUT);
 
-  digitalWrite(LED, HIGH);
+  // digitalWrite(LED, HIGH);
   digitalWrite(DETECT_LED, LOW);
   digitalWrite(READY_DETECT_LED, LOW);
   Serial.println(F("Starting BLE work!"));
@@ -97,13 +97,17 @@ void blinkStatus()
   {
     if (millis() - prv_time > blink_interval)
     {
-      digitalWrite(LED, !digitalRead(LED));
+      digitalWrite(DETECT_LED, !digitalRead(DETECT_LED));
+      digitalWrite(READY_DETECT_LED, LOW);
       prv_time = millis();
     }
   }
   else
   {
-    digitalWrite(LED, LOW);
+    if ((RDY_DETECT) && digitalRead(READY_DETECT_LED) == LOW)
+    {
+      digitalWrite(READY_DETECT_LED, HIGH);
+    }
   }
 }
 
