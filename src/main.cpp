@@ -1,4 +1,4 @@
-#include <Arduino.h>
+                      #include <Arduino.h>
 #include <BleKeyboard.h>
 #include <EventChange.h>
 #include "BLEClient.h"
@@ -7,12 +7,9 @@
 // #define LED 5
 #define DETECT_LED 32       // RED
 #define READY_DETECT_LED 33 // BLUE
-#include <HCSR04.h>
 
 std::string nameDevice = "BLE-MinimizeTaps";
 BleKeyboard BLE_KB(nameDevice, "Espressif", 100);
-
-UltraSonicDistanceSensor distanceSensor(TRIGGER_PIN, ECHO_PIN); // Initialize sensor that uses digital pins 13 and 12.
 
 EventChange ev_change;
 
