@@ -1,10 +1,9 @@
-                      #include <Arduino.h>
+#include <Arduino.h>
 #include <BleKeyboard.h>
 #include <EventChange.h>
 #include "BLEClient.h"
 #define TRIGGER_PIN 2
 #define ECHO_PIN 4
-// #define LED 5
 #define DETECT_LED 32       // RED
 #define READY_DETECT_LED 33 // BLUE
 
@@ -30,12 +29,10 @@ void setup()
   Serial.begin(115200);
   pinMode(TRIGGER_PIN, OUTPUT);
   pinMode(ECHO_PIN, INPUT);
-  // pinMode(LED, OUTPUT);
 
   pinMode(DETECT_LED, OUTPUT);
   pinMode(READY_DETECT_LED, OUTPUT);
 
-  // digitalWrite(LED, HIGH);
   digitalWrite(DETECT_LED, LOW);
   digitalWrite(READY_DETECT_LED, LOW);
   Serial.println(F("Starting BLE work!"));
