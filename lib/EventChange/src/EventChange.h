@@ -1,5 +1,5 @@
 #include <Arduino.h>
-//author: worawit sayned 23/05/2023
+//author: worawit sayned(BinaryBearzz) 23/05/2023
 typedef std::function<void(boolean)> cb_onchange;
 
 class EventChange
