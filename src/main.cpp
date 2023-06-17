@@ -8,7 +8,7 @@
 #define READY_DETECT_LED 33 // BLUE
 
 std::string nameDevice = "BLE-MinimizeTaps";
-BleKeyboard BLE_KB(nameDevice, "Espressif", 100);
+BleKeyboard BLE_KB(nameDevice);
 
 EventChange ev_change;
 
@@ -35,8 +35,9 @@ void setup()
 
   digitalWrite(DETECT_LED, LOW);
   digitalWrite(READY_DETECT_LED, LOW);
-  Serial.println(F("Starting BLE work!"));
   BLE_KB.begin();
+  Serial.print(F("Starting BLE work!: "));
+  Serial.println(nameDevice.c_str());
 
   ev_change.onChange([&](bool triger)
                      {
